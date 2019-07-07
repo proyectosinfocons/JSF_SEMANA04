@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:dataTable id="tbl" value="#{indexBean.lstFilas}" var="fil">
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column headerText="id" rowspan="4" />
+					<p:column headerText="Descripcion" rowspan="4" />
+				</p:row>
+				<p:row>
+					<ui:repeat var="col1" value="#{indexBean.lstColumnasNivel1}">
+						<p:column headerText="#{col1.descripcion}" colspan="#{col1.ancho}"
+							rowspan="#{col1.alto}" />
+					</ui:repeat>
+				</p:row>
+				<p:row>
+					<ui:repeat value="#{indexBean.lstColumnasNivel2}" var="col2">
+						<p:column colspan="#{col2.ancho}" rowspan="#{col2.alto}"
+							headerText="#{col2.descripcion}" />
+					</ui:repeat>
+				</p:row>
+				<p:row>
+					<ui:repeat value="#{indexBean.lstColumnasNivel3}" var="col3">
+						<p:column colspan="#{col3.ancho}" rowspan="#{col3.alto}"
+							headerText="#{col3.descripcion}" />
+					</ui:repeat>
+				</p:row>
+			</p:columnGroup>
+
+			<p:column>
+				<p:outputLabel value="#{fil.id}" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel value="#{fil.descripcion}" />
+			</p:column>
+
+			<c:forEach items="#{indexBean.lstCeldas}" var="cel">
+				<!--  <p:column rendered="#{fil.id == cel.idFila}">
+					<p:outputLabel value="#{cel.valor}" />
+				</p:column>-->
+				
+				<p:column rendered="#{fil.id == cel.idFila}">
+					<p:selectOneMenu>
+						<f:selectItem itemLabel="Peru" itemValue="1"/>
+						<f:selectItem itemLabel="Ecuador" itemValue="2"/>
+						<f:selectItem itemLabel="Colombia" itemValue="3"/>
+						<f:selectItem itemLabel="Honduras" itemValue="4"/>
+					</p:selectOneMenu>
+				</p:column>
+			</c:forEach>
+		</p:dataTable>
+	</h:form>
+</body>
+</html>

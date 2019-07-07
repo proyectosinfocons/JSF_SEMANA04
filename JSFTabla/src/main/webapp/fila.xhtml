@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<p:growl autoUpdate="true" showDetail="true" />
+	<h:form>
+		<p:selectOneMenu id="cboFila" value="#{filaBean.fila}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItems value="#{filaBean.lstFilas}" var="fil"
+				itemLabel="#{fil.descripcion}" itemValue="#{fil}" />
+		</p:selectOneMenu>
+
+		<p:inputText value="#{filaBean.fila.descripcion}" />
+		<p:commandButton value="Actualizar"
+			actionListener="#{filaBean.actualizar()}" update="cboFila"/>
+	</h:form>
+</body>
+</html>
